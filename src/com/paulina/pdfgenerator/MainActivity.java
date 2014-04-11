@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 							
 							@Override
 							public void run() {
-								// Tell user we're about to write
+								// Tell user we wrote the PDF.
 								textView.setText("PDF Ready!");
 								textView.setTextColor(Color.GREEN);
 							}
@@ -95,6 +95,11 @@ public class MainActivity extends ActionBarActivity {
 		}.start();
 	}
 	
+	/**
+	 * Tells if the external storage is available.
+	 * 
+	 * @return
+	 */
 	private boolean isExternalStorageWritable() {
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -104,12 +109,23 @@ public class MainActivity extends ActionBarActivity {
 		return false;
 	}
 
+	/**
+	 * Gets the path of the file.
+	 * 
+	 * @param pdfName
+	 * @return
+	 */
 	private File getStorageDir(String pdfName) {
 		File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pdfName);
 		
 		return file;
 	}
 	
+	/**
+	 * Generates an iText PDF table.
+	 * 
+	 * @return
+	 */
 	private PdfPTable generatePDFTable() {
 		// 3 columns table
 		PdfPTable table = new PdfPTable(3);
@@ -132,6 +148,13 @@ public class MainActivity extends ActionBarActivity {
 		return table;
 	}
 	
+	/**
+	 * Creates the PDF in the specified file.
+	 * 
+	 * @param file
+	 * @throws FileNotFoundException
+	 * @throws DocumentException
+	 */
 	private void createPDF(File file) throws 
 		FileNotFoundException, DocumentException {
 		
